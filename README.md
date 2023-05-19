@@ -4,9 +4,10 @@ Refactorización del frontend para la aplicación T-CREo. MiniProyecto de Desarr
 
 ## Integrantes
 
-* Yuni Quintero
-* Germán Robayo
-* Nairelys Hernandez
+* Daniela Ramírez
+* Jonathan Bautista
+* Ka Fung
+* Valeria Herrera
 
 ## Tutores
 
