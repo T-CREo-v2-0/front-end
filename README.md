@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# T-CREo front-end
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Refactorización del frontend para la aplicación T-CREo. MiniProyecto de Desarrollo de Software para la USBve.
+
+## Integrantes
+
+* Yuni Quintero
+* Germán Robayo
+* Nairelys Hernandez
+
+## Tutores
+
+* Yudith Cardinale
+* Irvin Dongo
+* Ana Aguilera
 
 ## Available Scripts
 
