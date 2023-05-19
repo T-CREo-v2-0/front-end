@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply bg-blue-500 text-sm text-white px-4 py-1 rounded hover:bg-blue-700;
+    }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
