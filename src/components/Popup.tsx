@@ -2,13 +2,13 @@
  * Popup main component T-CREo
  *
  */
-import React from "react";
+// import React from "react";
 
 function Popup() {
   return (
     <div className="container max-h-60 p-2.5 w-[480px]">
       <h2 className="title text-3xl font-bold my-[1px] text-center py-2">
-        T-CREo v2.0
+        T-CREo v2.0.0
       </h2>
       <div className="row flex">
         {/* Ejemplo y selección de lenguaje */}
