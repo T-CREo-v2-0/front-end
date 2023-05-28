@@ -3,6 +3,7 @@
   "description": "sí",
   "version": "1.0",
   "manifest_version": 3,
+  "options_page": "options.html",
   "action": {
     "default_popup": "index.html",
     "default_title": "Open the popup",

@@ -4,7 +4,7 @@
  */
 // import React from "react";
 
-function Popup() {
+function PopupForm() {
   return (
     <div className="container max-h-60 p-2.5 w-[480px]">
       <h2 className="title text-3xl font-bold my-[1px] text-center py-2">
@@ -105,4 +105,4 @@ function Popup() {
   );
 }
 
-export { Popup };
+export { PopupForm };
