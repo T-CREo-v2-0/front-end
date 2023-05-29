@@ -3,6 +3,16 @@
   "description": "sí",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "declarativeContent",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost/*"
+  ],
   "options_page": "options.html",
   "action": {
     "default_popup": "index.html",
