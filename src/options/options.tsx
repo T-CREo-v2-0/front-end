@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { OptionsForm } from "./OptionsForm";
-import '../styles/index.css';
+import { OptionsForm } from "../components/Options/OptionsForm";
+import '../assets/styles/index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

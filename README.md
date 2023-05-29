@@ -17,6 +17,8 @@ Refactorización del frontend para la aplicación T-CREo. MiniProyecto de Desarr
 
 ## Available Scripts
 
+Se requiere de Node v18.14.0 para correr el proyecto.
+
 ### `npm install`
 
 Instala las dependencias necesarias para correr el proyecto.
@@ -31,4 +33,4 @@ La página se recargará si haces cambios en el código.\
 
 ### `npm run build`
 
-Construye la aplicación para producción en la carpeta `build`.\
+Construye la aplicación para producción en la carpeta `dist`.\

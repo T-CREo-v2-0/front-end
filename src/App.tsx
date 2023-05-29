@@ -1,5 +1,5 @@
-import { PopupForm } from "./popup/PopupForm";
-import './styles/index.css'
+import { PopupForm } from "./components/Popup/PopupForm";
+import './assets/styles/index.css';
 
 function App() {
   return (
