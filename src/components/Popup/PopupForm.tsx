@@ -27,16 +27,36 @@ function PopupForm() {
   const [credibility, setCredibility] = useState(0);
   const [weights, setWeights] = useState(defaultWeight);
 
-  // Get weight from chrome storage, if there's no data, use defaultWeight
-  chrome.storage.local.get(["inputs"], function (result) {
-    if (result.inputs) {
-      setWeights(result.inputs);
-    } else {
-      setWeights(defaultWeight);
-    }
+  // Get weights from local storage
+  React.useEffect(() => {
+    const weightSpam = localStorage.getItem("weightSpam");
+    const weightBadWords = localStorage.getItem("weightBadWords");
+    const weightMisspelling = localStorage.getItem("weightMisspelling");
+    const weightText = localStorage.getItem("weightText");
+    const weightUser = localStorage.getItem("weightUser");
+    const weightSocial = localStorage.getItem("weightSocial");
+    const maxFollowers = localStorage.getItem("maxFollowers");
 
-    console.log("Weights: ", weights);
-  });
+    if (
+      weightSpam &&
+      weightBadWords &&
+      weightMisspelling &&
+      weightText &&
+      weightUser &&
+      weightSocial &&
+      maxFollowers
+    ) {
+      setWeights({
+        weightSpam: Number(weightSpam),
+        weightBadWords: Number(weightBadWords),
+        weightMisspelling: Number(weightMisspelling),
+        weightText: Number(weightText),
+        weightUser: Number(weightUser),
+        weightSocial: Number(weightSocial),
+        maxFollowers: Number(maxFollowers),
+      });
+    }
+  }, []);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...inputs, text: event.target.value });
@@ -49,9 +69,9 @@ function PopupForm() {
     client
       .getPlainTextCredibility(
         {
-          weightBadWords: defaultWeight.weightBadWords,
-          weightMisspelling: defaultWeight.weightMisspelling,
-          weightSpam: defaultWeight.weightSpam,
+          weightBadWords: weights.weightBadWords,
+          weightMisspelling: weights.weightMisspelling,
+          weightSpam: weights.weightSpam,
         },
         {
           text: inputs.text,

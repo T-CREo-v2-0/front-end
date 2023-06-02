@@ -4,6 +4,7 @@
  */
 import React from "react";
 // import constants from './constants'
+import { VerifySum } from "../../controllers/weightCalculation";
 
 const labels = [
   {
@@ -110,7 +111,7 @@ const defaultWeight = {
 function OptionsForm() {
   const [inputs, setInputs] = React.useState({
     weightSpam: defaultWeight.weightSpam,
-    weightBadWords: defaultWeight.weightSpam,
+    weightBadWords: defaultWeight.weightBadWords,
     weightMisspelling: defaultWeight.weightMisspelling,
     weightText: defaultWeight.weightText,
     weightUser: defaultWeight.weightUser,
@@ -154,14 +155,44 @@ function OptionsForm() {
     event.preventDefault();
     console.log(inputs);
 
-    // Guarda en Chrome Storage
-    chrome.storage.local.set({ inputs: inputs }, function () {
-      console.log("Inputs saved");
-    });
+    // Check if weights text (spam, badwords, misspelling) sum is 1
+    const sum = VerifySum([
+      inputs.weightSpam,
+      inputs.weightBadWords,
+      inputs.weightMisspelling,
+    ]);
+    if (!sum) {
+      alert("The sum of the weights for text credibility parameters must be 1");
+      return;
+    }
 
-    chrome.storage.local.get(["inputs"], function (result) {
-      console.log("Get Inputs: ", result.inputs);
-    });
+    // Check if weights tweet (text, user, social) sum is 1
+    const sum2 = VerifySum([
+      inputs.weightText,
+      inputs.weightUser,
+      inputs.weightSocial,
+    ]);
+    if (!sum2) {
+      alert(
+        "The sum of the weights for tweet credibility parameters must be 1"
+      );
+      return;
+    }
+
+    // Save in local storage
+    localStorage.setItem("weightSpam", inputs.weightSpam.toString());
+    localStorage.setItem("weightBadWords", inputs.weightBadWords.toString());
+    localStorage.setItem(
+      "weightMisspelling",
+      inputs.weightMisspelling.toString()
+    );
+    localStorage.setItem("weightText", inputs.weightText.toString());
+    localStorage.setItem("weightUser", inputs.weightUser.toString());
+    localStorage.setItem("weightSocial", inputs.weightSocial.toString());
+    localStorage.setItem("maxFollowers", inputs.maxFollowers.toString());
+
+    // Alert success
+    alert("Parameters saved successfully");
   };
 
   return (
@@ -203,13 +234,12 @@ function OptionsForm() {
                     }
                     onBlur={() => handleShowError(input.name)}
                   />
-                  {showError[input.name as keyof ShowError] &&
-                    (<span className="ml-1 text-red-500 italic text-sm">
-                    {input.errormessage}
+                  {showError[input.name as keyof ShowError] && (
+                    <span className="ml-1 text-red-500 italic text-sm">
+                      {input.errormessage}
                     </span>
                   )}
                 </div>
-
               </div>
             ))}
           </div>
