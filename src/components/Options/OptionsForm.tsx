@@ -15,30 +15,30 @@ const labels = [
         title: "Spam detection",
         placeholder: "Spam",
         type: "number",
+        min: 0,
+        max: 1,
         name: "weightSpam",
-        min: "1",
-        max: "100",
-        errormessage: "Please enter a number between 1 and 100",
+        errormessage: "Please enter a number between 0 and 1",
       },
       {
         id: 2,
         title: "Bad words proportion to text",
         placeholder: "Bad words",
         type: "number",
+        min: 0,
+        max: 1,
         name: "weightBadWords",
-        min: "1",
-        max: "100",
-        errormessage: "Please enter a number between 1 and 100",
+        errormessage: "Please enter a number between 0 and 1",
       },
       {
         id: 3,
         title: "Misspelling detection",
         placeholder: "Misspelling",
         type: "number",
+        min: 0,
+        max: 1,
         name: "weightMisspelling",
-        min: "1",
-        max: "100",
-        errormessage: "Please enter a number between 1 and 100",
+        errormessage: "Please enter a number between 0 and 1",
       },
     ],
   },
@@ -51,30 +51,30 @@ const labels = [
         title: "Text credibility",
         placeholder: "Text",
         type: "number",
+        min: 0,
+        max: 1,
         name: "weightText",
-        min: "1",
-        max: "100",
-        errormessage: "Please enter a number between 1 and 100",
+        errormessage: "Please enter a number between 0 and 1",
       },
       {
         id: 2,
         title: "User credibility",
         placeholder: "User",
         type: "number",
+        min: 0,
+        max: 1,
         name: "weightUser",
-        min: "1",
-        max: "100",
-        errormessage: "Please enter a number between 1 and 100",
+        errormessage: "Please enter a number between 0 and 1",
       },
       {
         id: 3,
         title: "Social credibility",
         placeholder: "Social",
         type: "number",
+        min: 0,
+        max: 1,
         name: "weightSocial",
-        min: "1",
-        max: "100",
-        errormessage: "Please enter a number between 1 and 100",
+        errormessage: "Please enter a number between 0 and 1",
       },
     ],
   },
@@ -87,6 +87,8 @@ const labels = [
         title: "Max followers",
         placeholder: "Max followers",
         type: "number",
+        min: 0,
+        max: null,
         name: "maxFollowers",
         pattern: "[0-9]*",
         errormessage: "Please enter a number",
@@ -95,15 +97,25 @@ const labels = [
   },
 ];
 
+const defaultWeight = {
+  weightBadWords: 0.33,
+  weightMisspelling: 0.23,
+  weightSpam: 0.44,
+  weightText: 0.34,
+  weightUser: 0.33,
+  weightSocial: 0.33,
+  maxFollowers: 2000000,
+};
+
 function OptionsForm() {
   const [inputs, setInputs] = React.useState({
-    weightSpam: "",
-    weightBadWords: "",
-    weightMisspelling: "",
-    weightText: "",
-    weightUser: "",
-    weightSocial: "",
-    maxFollowers: "",
+    weightSpam: defaultWeight.weightSpam,
+    weightBadWords: defaultWeight.weightSpam,
+    weightMisspelling: defaultWeight.weightMisspelling,
+    weightText: defaultWeight.weightText,
+    weightUser: defaultWeight.weightUser,
+    weightSocial: defaultWeight.weightSocial,
+    maxFollowers: defaultWeight.maxFollowers,
   });
 
   // Show error message
@@ -134,7 +146,7 @@ function OptionsForm() {
 
     setShowError((prevShowError) => ({
       ...prevShowError,
-      [name]: isValid,
+      [name]: !isValid,
     }));
   };
 
@@ -143,10 +155,13 @@ function OptionsForm() {
     console.log(inputs);
 
     // Guarda en Chrome Storage
-    chrome.storage.sync.set({ inputs: inputs }, function () {
+    chrome.storage.local.set({ inputs: inputs }, function () {
       console.log("Inputs saved");
     });
 
+    chrome.storage.local.get(["inputs"], function (result) {
+      console.log("Get Inputs: ", result.inputs);
+    });
   };
 
   return (
@@ -172,18 +187,24 @@ function OptionsForm() {
                   <input
                     type={input.type}
                     id={input.name}
+                    required
+                    autoComplete="off"
+                    {...(input.min && { min: input.min })}
+                    {...(input.max && { max: input.max })}
+                    {...(input.type === "number" && { step: "any" })}
                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                     placeholder={input.placeholder}
+                    defaultValue={inputs[input.name as keyof typeof inputs]}
                     onChange={(event) =>
                       setInputs({
                         ...inputs,
-                        [input.name]: event.target.value,
+                        [input.name]: Number(event.target.value),
                       })
                     }
                     onBlur={() => handleShowError(input.name)}
                   />
                   {showError[input.name as keyof ShowError] &&
-                    (<span className="text-red-500 italic text-sm">
+                    (<span className="ml-1 text-red-500 italic text-sm">
                     {input.errormessage}
                     </span>
                   )}

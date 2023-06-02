@@ -8,10 +8,14 @@ import { Language } from "../../api/types";
 
 const client = new TCREoClient();
 
-const filterOptions = {
+const defaultWeight = {
   weightBadWords: 0.33,
   weightMisspelling: 0.23,
   weightSpam: 0.44,
+  weightText: 0.34,
+  weightUser: 0.33,
+  weightSocial: 0.33,
+  maxFollowers: 2000000,
 };
 
 function PopupForm() {
@@ -21,6 +25,18 @@ function PopupForm() {
     lang: "en",
   });
   const [credibility, setCredibility] = useState(0);
+  const [weights, setWeights] = useState(defaultWeight);
+
+  // Get weight from chrome storage, if there's no data, use defaultWeight
+  chrome.storage.local.get(["inputs"], function (result) {
+    if (result.inputs) {
+      setWeights(result.inputs);
+    } else {
+      setWeights(defaultWeight);
+    }
+
+    console.log("Weights: ", weights);
+  });
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...inputs, text: event.target.value });
@@ -33,9 +49,9 @@ function PopupForm() {
     client
       .getPlainTextCredibility(
         {
-          weightBadWords: filterOptions.weightBadWords,
-          weightMisspelling: filterOptions.weightMisspelling,
-          weightSpam: filterOptions.weightSpam,
+          weightBadWords: defaultWeight.weightBadWords,
+          weightMisspelling: defaultWeight.weightMisspelling,
+          weightSpam: defaultWeight.weightSpam,
         },
         {
           text: inputs.text,
