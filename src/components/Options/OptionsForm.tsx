@@ -180,16 +180,11 @@ function OptionsForm() {
     }
 
     // Save in local storage
-    localStorage.setItem("weightSpam", inputs.weightSpam.toString());
-    localStorage.setItem("weightBadWords", inputs.weightBadWords.toString());
-    localStorage.setItem(
-      "weightMisspelling",
-      inputs.weightMisspelling.toString()
-    );
-    localStorage.setItem("weightText", inputs.weightText.toString());
-    localStorage.setItem("weightUser", inputs.weightUser.toString());
-    localStorage.setItem("weightSocial", inputs.weightSocial.toString());
-    localStorage.setItem("maxFollowers", inputs.maxFollowers.toString());
+    labels.forEach((label) => {
+      label.inputs.forEach((input) => {
+        localStorage.setItem(input.name, inputs[input.name  as keyof typeof inputs] as unknown as string);
+      });
+    });
 
     // Alert success
     alert("Parameters saved successfully");
