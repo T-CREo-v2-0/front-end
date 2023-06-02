@@ -14,22 +14,31 @@ const labels = [
         id: 1,
         title: "Spam detection",
         placeholder: "Spam",
-        type: "text",
+        type: "number",
         name: "weightSpam",
+        min: "1",
+        max: "100",
+        errormessage: "Please enter a number between 1 and 100",
       },
       {
         id: 2,
         title: "Bad words proportion to text",
         placeholder: "Bad words",
-        type: "text",
+        type: "number",
         name: "weightBadWords",
+        min: "1",
+        max: "100",
+        errormessage: "Please enter a number between 1 and 100",
       },
       {
         id: 3,
         title: "Misspelling detection",
         placeholder: "Misspelling",
-        type: "text",
+        type: "number",
         name: "weightMisspelling",
+        min: "1",
+        max: "100",
+        errormessage: "Please enter a number between 1 and 100",
       },
     ],
   },
@@ -41,22 +50,31 @@ const labels = [
         id: 1,
         title: "Text credibility",
         placeholder: "Text",
-        type: "text",
+        type: "number",
         name: "weightText",
+        min: "1",
+        max: "100",
+        errormessage: "Please enter a number between 1 and 100",
       },
       {
         id: 2,
         title: "User credibility",
         placeholder: "User",
-        type: "text",
+        type: "number",
         name: "weightUser",
+        min: "1",
+        max: "100",
+        errormessage: "Please enter a number between 1 and 100",
       },
       {
         id: 3,
         title: "Social credibility",
         placeholder: "Social",
-        type: "text",
+        type: "number",
         name: "weightSocial",
+        min: "1",
+        max: "100",
+        errormessage: "Please enter a number between 1 and 100",
       },
     ],
   },
@@ -68,8 +86,10 @@ const labels = [
         id: 1,
         title: "Max followers",
         placeholder: "Max followers",
-        type: "text",
+        type: "number",
         name: "maxFollowers",
+        pattern: "[0-9]*",
+        errormessage: "Please enter a number",
       },
     ],
   },
@@ -85,6 +105,38 @@ function OptionsForm() {
     weightSocial: "",
     maxFollowers: "",
   });
+
+  // Show error message
+  interface ShowError {
+    weightSpam: boolean;
+    weightBadWords: boolean;
+    weightMisspelling: boolean;
+    weightText: boolean;
+    weightUser: boolean;
+    weightSocial: boolean;
+    maxFollowers: boolean;
+  }
+
+  const [showError, setShowError] = React.useState<ShowError>({
+    weightSpam: false,
+    weightBadWords: false,
+    weightMisspelling: false,
+    weightText: false,
+    weightUser: false,
+    weightSocial: false,
+    maxFollowers: false,
+  });
+
+  // Check if input is valid and show error message
+  const handleShowError = (name: string) => {
+    const inputElement = document.getElementById(name) as HTMLInputElement;
+    const isValid = inputElement.checkValidity();
+
+    setShowError((prevShowError) => ({
+      ...prevShowError,
+      [name]: isValid,
+    }));
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -128,8 +180,15 @@ function OptionsForm() {
                         [input.name]: event.target.value,
                       })
                     }
+                    onBlur={() => handleShowError(input.name)}
                   />
+                  {showError[input.name as keyof ShowError] &&
+                    (<span className="text-red-500 italic text-sm">
+                    {input.errormessage}
+                    </span>
+                  )}
                 </div>
+
               </div>
             ))}
           </div>
