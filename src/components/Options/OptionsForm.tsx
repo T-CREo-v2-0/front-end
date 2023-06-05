@@ -3,100 +3,8 @@
  *
  */
 import React from "react";
-// import constants from './constants'
+import { labels } from "./OptionsLabels";
 import { VerifySum } from "../../controllers/weightCalculation";
-
-const labels = [
-  {
-    id: 1,
-    title: "Customize text credibility parameters",
-    inputs: [
-      {
-        id: 1,
-        title: "Spam detection",
-        placeholder: "Spam",
-        type: "number",
-        min: 0,
-        max: 1,
-        name: "weightSpam",
-        errormessage: "Please enter a number between 0 and 1",
-      },
-      {
-        id: 2,
-        title: "Bad words proportion to text",
-        placeholder: "Bad words",
-        type: "number",
-        min: 0,
-        max: 1,
-        name: "weightBadWords",
-        errormessage: "Please enter a number between 0 and 1",
-      },
-      {
-        id: 3,
-        title: "Misspelling detection",
-        placeholder: "Misspelling",
-        type: "number",
-        min: 0,
-        max: 1,
-        name: "weightMisspelling",
-        errormessage: "Please enter a number between 0 and 1",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Customize tweet credibility parameters",
-    inputs: [
-      {
-        id: 1,
-        title: "Text credibility",
-        placeholder: "Text",
-        type: "number",
-        min: 0,
-        max: 1,
-        name: "weightText",
-        errormessage: "Please enter a number between 0 and 1",
-      },
-      {
-        id: 2,
-        title: "User credibility",
-        placeholder: "User",
-        type: "number",
-        min: 0,
-        max: 1,
-        name: "weightUser",
-        errormessage: "Please enter a number between 0 and 1",
-      },
-      {
-        id: 3,
-        title: "Social credibility",
-        placeholder: "Social",
-        type: "number",
-        min: 0,
-        max: 1,
-        name: "weightSocial",
-        errormessage: "Please enter a number between 0 and 1",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Max followers parameter",
-    inputs: [
-      {
-        id: 1,
-        title: "Max followers",
-        placeholder: "Max followers",
-        type: "number",
-        min: 0,
-        max: null,
-        name: "maxFollowers",
-        pattern: "[0-9]*",
-        errormessage: "Please enter a number",
-      },
-    ],
-  },
-];
 
 const defaultWeight = {
   weightBadWords: 0.33,
@@ -193,12 +101,16 @@ function OptionsForm() {
   return (
     <div className="container p-2.5 ">
       <h1 className="title text-2xl font-bold mb-4">
-        T-Creo v2.0 - Credibility parameters
+        T-Creo - Credibility parameters
       </h1>
       <form onSubmit={handleSubmit}>
         {labels.map((label) => (
           <div key={label.id}>
-            <h2 className="title text-xl font-bold">{label.title}</h2>
+          <div className="md:flex md:items-center">
+            <div className="md:w-1/3">
+            <h2 className="title text-xl font-bold md:text-right">{label.title}</h2></div>
+            <div className="md:w-2/3"></div>
+          </div>
             {label.inputs.map((input) => (
               <div className="md:flex md:items-center my-3" key={input.id}>
                 <div className="md:w-1/3">

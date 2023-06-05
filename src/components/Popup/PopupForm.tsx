@@ -5,6 +5,7 @@
 import React, { useState } from "react";
 import TCREoClient from "../../api/client";
 import { Language } from "../../api/types";
+import { TWCredibility } from "./TWCredibility";
 
 const client = new TCREoClient();
 
@@ -160,16 +161,10 @@ function PopupForm() {
       <h6 id="currentPage" className="flex justify-center text-base">
         {" "}
       </h6>
-      <div id="PageSensitiveButtons" className="flex justify-center">
-        <button
-          id="VerifyPageButtonTwitterApi"
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Verify Page Tweets with Twitter Api
-        </button>
-      </div>
 
+      {/* TW Credibility */}
+      <TWCredibility />
+      
       {/* Spinner */}
       {/* <hr id="secondHorBar" />
       <div
