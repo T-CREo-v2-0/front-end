@@ -1,10 +1,6 @@
-/**
- * Credibility parameters component
- *
- */
 import React from "react";
-import { labels } from "./OptionsLabels";
-import { VerifySum } from "../../controllers/weightCalculation";
+import { labels } from "./labels";
+import { VerifySum } from "../controllers/weightCalculation";
 
 const defaultWeight = {
   weightBadWords: 0.33,
@@ -16,7 +12,7 @@ const defaultWeight = {
   maxFollowers: 2000000,
 };
 
-function OptionsForm() {
+const Options = () => {
   const [inputs, setInputs] = React.useState({
     weightSpam: defaultWeight.weightSpam,
     weightBadWords: defaultWeight.weightBadWords,
@@ -90,9 +86,15 @@ function OptionsForm() {
     // Save in local storage
     labels.forEach((label) => {
       label.inputs.forEach((input) => {
-        localStorage.setItem(input.name, inputs[input.name  as keyof typeof inputs] as unknown as string);
+        localStorage.setItem(
+          input.name,
+          inputs[input.name as keyof typeof inputs] as unknown as string
+        );
       });
     });
+
+    // Save in chrome storage
+    chrome.storage.sync.set(inputs);
 
     // Alert success
     alert("Parameters saved successfully");
@@ -106,11 +108,14 @@ function OptionsForm() {
       <form onSubmit={handleSubmit}>
         {labels.map((label) => (
           <div key={label.id}>
-          <div className="md:flex md:items-center">
-            <div className="md:w-1/3">
-            <h2 className="title text-xl font-bold md:text-right">{label.title}</h2></div>
-            <div className="md:w-2/3"></div>
-          </div>
+            <div className="md:flex md:items-center">
+              <div className="md:w-1/3">
+                <h2 className="title text-xl font-bold md:text-right">
+                  {label.title}
+                </h2>
+              </div>
+              <div className="md:w-2/3"></div>
+            </div>
             {label.inputs.map((input) => (
               <div className="md:flex md:items-center my-3" key={input.id}>
                 <div className="md:w-1/3">
@@ -165,6 +170,6 @@ function OptionsForm() {
       </form>
     </div>
   );
-}
+};
 
-export { OptionsForm };
+export default Options;

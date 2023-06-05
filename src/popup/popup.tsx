@@ -1,10 +1,7 @@
-/**
- * Popup main component T-CREo
- *
- */
+
 import React, { useState } from "react";
-import TCREoClient from "../../api/client";
-import { Language } from "../../api/types";
+import TCREoClient from "../api/client";
+import { Language } from "../api/types";
 import { TWCredibility } from "./TWCredibility";
 
 const client = new TCREoClient();
@@ -19,8 +16,8 @@ const defaultWeight = {
   maxFollowers: 2000000,
 };
 
-function PopupForm() {
-  // Plain text to analyze
+const Popup = () => {
+    // Plain text to analyze
   const [inputs, setInput] = useState({
     text: "I'm sorry professor, but I must not tell lies",
     lang: "en",
@@ -66,6 +63,12 @@ function PopupForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(inputs);
+
+    // Get input text from chrome storage and print
+    chrome.storage.sync.get(["inputs"], function (result) {
+        alert("Inputs " + result.inputs.weightSpam);
+        }
+    );
 
     client
       .getPlainTextCredibility(
@@ -190,6 +193,6 @@ function PopupForm() {
       </div> */}
     </div>
   );
-}
+};
 
-export { PopupForm };
+export default Popup;
