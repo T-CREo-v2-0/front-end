@@ -83,16 +83,6 @@ const Options = () => {
       return;
     }
 
-    // Save in local storage
-    labels.forEach((label) => {
-      label.inputs.forEach((input) => {
-        localStorage.setItem(
-          input.name,
-          inputs[input.name as keyof typeof inputs] as unknown as string
-        );
-      });
-    });
-
     // Save in chrome storage
     chrome.storage.sync.set(inputs);
 
