@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import {
   Health,
   Credibility,
+  TweetCredibilityWeights,
   TextCredibilityWeights,
   PlainText,
 } from "./types";
@@ -31,5 +32,16 @@ export default class TCREoClient {
       },
     });
     return response.data;
+  }
+
+  async getTweetCredibility(
+    tweetId: string, tweetWeights: TweetCredibilityWeights,
+    maxFollowers: number) : Promise<Credibility> {
+    const response = await this.client.get('/calculate/twitter/tweets', {
+      params: {
+        ...tweetWeights, maxFollowers, tweetId
+      }
+    })
+    return response.data
   }
 }
