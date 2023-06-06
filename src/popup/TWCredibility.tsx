@@ -28,9 +28,6 @@ function TWCredibility() {
           function (filterOptions) {
             // TO-MODIFY Get tweets
             if (response.instruction === "api") {
-              // const tweets = response.tweetTexts;
-              // alert(tweets.join(", "));
-
               // TO-MODIFY
               let promiseList: Promise<{ credibility: number }>[] =
                 response.tweetTexts.map((tweet: number) => {
@@ -48,7 +45,6 @@ function TWCredibility() {
                 });
 
               Promise.all(promiseList).then((values) => {
-                alert(values.map((value) => value.credibility).join(", "));
                 port.postMessage({
                   sender: "www",
                   instruction: "update",
@@ -61,19 +57,6 @@ function TWCredibility() {
       });
     });
   };
-
-  // const ValidateTwitterTweets = () => {
-  //   // Send message to content script to perfom Twitter Api validation
-  //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  //     chrome.tabs.sendMessage(
-  //       tabs[0].id as number,
-  //       { sender: "www", instruction: "api" },
-  //       function (response) {
-  //         console.log(response.status);
-  //       }
-  //     );
-  //   });
-  // };
 
   return (
     <div id="PageSensitiveButtons" className="flex justify-center">

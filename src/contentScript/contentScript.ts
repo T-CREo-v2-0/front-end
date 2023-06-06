@@ -41,9 +41,10 @@ chrome.runtime.onConnect.addListener((port) => {
           credibilityDiv.className = "Credibility-Ranking";
           credibilityDiv.innerText = "0%";
           credibilityDiv.style.color = "red";
-          credibilityDiv.style.fontSize = "24px";
+          credibilityDiv.style.fontSize = "14px";
           credibilityDiv.style.fontWeight = "bold";
-
+          credibilityDiv.style.fontFamily = "Arial, Helvetica, sans-serif";
+          credibilityDiv.style.textAlign = "right";
           // Append credibility div to the child of tweetContainer.
           tweetContainer.children[0].appendChild(credibilityDiv);  
         }
