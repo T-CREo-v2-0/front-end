@@ -26,39 +26,29 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   );
-
-  // // If Twitter page, show Twitter credibility button
-  // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  //   const tab = tabs[0];
-  //   const tabUrl = tab.url;
-
-  //   if (!tabUrl.includes("twitter.com")) {
-  //     document.getElementById("VerifyPageButtonTwitterApi").style.display =
-  //       "none";
-  //   }
-  // });
 });
 
 const Popup = () => {
+  // If Twitter page, show Twitter credibility button
+  const [showTwButton, setShowTwButton] = React.useState(false);
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    const tab = tabs[0];
+    const tabUrl = tab.url;
+
+    if (tabUrl.includes("twitter.com")) setShowTwButton(true);
+  });
 
   return (
-    <div className="container max-h-60 p-2.5 w-[480px]">
+    <div className="container p-2.5 w-[480px]">
       <h2 className="title text-3xl font-bold my-1 text-center py-2">
-        T-CREo v2.0.0
+        T-CREo v2.0
       </h2>
 
       {/* Plain Text Credibility */}
       <PlainTextCredibility />
 
-      <hr id="firstHorBar" className="my-2.5" />
-      <h6 id="currentPage" className="flex justify-center text-base">
-        {" "}
-      </h6>
-
       {/* TW Credibility */}
-      <TWCredibility />
-
-      {/* Spinner */}
+      {showTwButton && <TWCredibility />}
     </div>
   );
 };

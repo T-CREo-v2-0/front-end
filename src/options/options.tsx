@@ -91,24 +91,25 @@ const Options = () => {
   };
 
   return (
-    <div className="container p-2.5 ">
-      <h1 className="title text-2xl font-bold mb-4">
-        T-Creo - Credibility parameters
+    // Center content
+    <div className="container p-4 mx-auto my-4">
+      <h1 className="title text-2xl font-bold my-1 text-center py-2">
+        T-CREo - Credibility parameters
       </h1>
       <form onSubmit={handleSubmit}>
         {labels.map((label) => (
           <div key={label.id}>
             <div className="md:flex md:items-center">
-              <div className="md:w-1/3">
+              <div className="md:w-1/2">
                 <h2 className="title text-xl font-bold md:text-right">
                   {label.title}
                 </h2>
               </div>
-              <div className="md:w-2/3"></div>
+              <div className="md:w-1/2"></div>
             </div>
             {label.inputs.map((input) => (
               <div className="md:flex md:items-center my-3" key={input.id}>
-                <div className="md:w-1/3">
+                <div className="md:w-1/2">
                   <label
                     htmlFor=""
                     className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -116,7 +117,7 @@ const Options = () => {
                     {input.title}
                   </label>
                 </div>
-                <div className="md:w-2/3">
+                <div className="md:w-1/2">
                   <input
                     type={input.type}
                     id={input.name}
@@ -147,8 +148,8 @@ const Options = () => {
           </div>
         ))}
         <div className="md:flex md:items-center">
-          <div className="md:w-1/3"></div>
-          <div className="md:w-2/3">
+          <div className="md:w-1/2"></div>
+          <div className="md:w-1/2">
             <button
               className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="submit"

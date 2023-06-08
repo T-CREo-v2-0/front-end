@@ -1,12 +1,17 @@
 import React from "react";
 import TCREoClient from "../api/client";
 import { Language } from "../api/types";
+import Spinner from "./Spinner";
 
 // Create client
 const client = new TCREoClient();
 
 function TWCredibility() {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const ValidateTwitterTweets = () => {
+    setIsLoading(true);
+
     // Chrome scripting and send message
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       const port = chrome.tabs.connect(tabs[0].id as number);
@@ -30,6 +35,19 @@ function TWCredibility() {
             if (response.instruction === "api") {
               // TO-MODIFY
               let promiseList: Promise<{ credibility: number }>[] =
+                // response.tweetIds.map((tweetId: number) => {
+                //   return client.getTweetCredibility(
+                //     tweetId.toString(),
+                //     { weightBadWords: +filterOptions.weightBadWords,
+                //       weightMisspelling: +filterOptions.weightMisspelling,
+                //       weightSpam: +filterOptions.weightSpam,
+                //       weightText: +filterOptions.weightText,
+                //       weightSocial: +filterOptions.weightSocial,
+                //       weightUser: +filterOptions.weightUser
+                //     },
+                //     +filterOptions.maxFollowers
+                //   );
+                // });
                 response.tweetTexts.map((tweet: number) => {
                   return client.getPlainTextCredibility(
                     {
@@ -51,6 +69,8 @@ function TWCredibility() {
                   credList: values.map((value) => value.credibility),
                 });
               });
+
+              setIsLoading(false);
             }
           }
         );
@@ -59,15 +79,25 @@ function TWCredibility() {
   };
 
   return (
-    <div id="PageSensitiveButtons" className="flex justify-center">
-      <button
-        id="VerifyPageButtonTwitterApi"
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={ValidateTwitterTweets}
-      >
-        Verify Page Tweets with Twitter Api
-      </button>
+    <div id="PageSensitiveButtons" className="flex flex-col justify-center">
+      <hr id="firstHorBar" className="my-2.5" />
+      {!isLoading ? (
+        <div className="flex flex-col justify-center">
+          <h6 id="currentPage" className="flex justify-center text-base">
+            You are currently on a Twitter page
+          </h6>
+          <button
+            id="VerifyPageButtonTwitterApi"
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/3 self-center my-2.5"
+            onClick={ValidateTwitterTweets}
+          >
+            Verify Page Tweets
+          </button>
+        </div>
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 }

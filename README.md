@@ -15,9 +15,9 @@ Refactorización del frontend para la aplicación T-CREo. MiniProyecto de Desarr
 * Irvin Dongo
 * Ana Aguilera
 
-## Available Scripts
+## Scripts Disponibles
 
-Se requiere de Node v18.14.0 para correr el proyecto.
+Se requiere de Node v18.16.0 para correr el proyecto.
 
 ### `yarn install`
 

@@ -35,7 +35,10 @@ chrome.runtime.onConnect.addListener((port) => {
       );
       tweetContainers.map((tweetContainer, index: number) => {
         // If doesnt have Creditability-Ranking class, create one
-        if (tweetContainer.children[0].querySelector(".Credibility-Ranking") == null) {
+        if (
+          tweetContainer.children[0].querySelector(".Credibility-Ranking") ==
+          null
+        ) {
           const credibilityDiv = document.createElement("div");
           credibilityDiv.id = "TweetNumber" + index;
           credibilityDiv.className = "Credibility-Ranking";
@@ -46,7 +49,7 @@ chrome.runtime.onConnect.addListener((port) => {
           credibilityDiv.style.fontFamily = "Arial, Helvetica, sans-serif";
           credibilityDiv.style.textAlign = "right";
           // Append credibility div to the child of tweetContainer.
-          tweetContainer.children[0].appendChild(credibilityDiv);  
+          tweetContainer.children[0].appendChild(credibilityDiv);
         }
       });
 
@@ -88,7 +91,8 @@ function UpdateTweetCredibility(credibilityList: string[]) {
       }
       const FinalColor: string = "#" + RedHex + GreenHex + "00";
       if (tweetContainer != null) {
-        tweetContainer.innerText = "T-CREo Credibility: " + credibilityItem + "%";
+        tweetContainer.innerText =
+          "T-CREo Credibility: " + credibilityItem + "%";
         tweetContainer.style.color = FinalColor;
       }
     } else {
