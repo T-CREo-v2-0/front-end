@@ -35,7 +35,7 @@ const Popup = () => {
     const tab = tabs[0];
     const tabUrl = tab.url;
 
-    if (tabUrl.includes("twitter.com")) setShowTwButton(true);
+    if (tabUrl.includes("twitter.com") || tabUrl.includes("localhost:5173")) setShowTwButton(true);
   });
 
   return (

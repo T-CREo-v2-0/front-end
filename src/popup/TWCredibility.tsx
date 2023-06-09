@@ -37,7 +37,7 @@ function TWCredibility() {
               let promiseList: Promise<{ credibility: number }>[] =
                 // response.tweetIds.map((tweetId: number) => {
                 //   return client.getTweetCredibility(
-                //     tweetId.toString(),
+                //     "1651454488429879296",
                 //     { weightBadWords: +filterOptions.weightBadWords,
                 //       weightMisspelling: +filterOptions.weightMisspelling,
                 //       weightSpam: +filterOptions.weightSpam,
