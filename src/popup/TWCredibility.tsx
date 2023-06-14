@@ -35,9 +35,9 @@ function TWCredibility() {
             if (response.instruction === "api") {
               // TO-MODIFY
               let promiseList: Promise<{ credibility: number }>[] =
-                // response.tweetIds.map((tweetId: number) => {
+                // response.tweetIds.map((_: number) => {
                 //   return client.getTweetCredibility(
-                //     "1651454488429879296",
+                //     "1651454488429879300",
                 //     { weightBadWords: +filterOptions.weightBadWords,
                 //       weightMisspelling: +filterOptions.weightMisspelling,
                 //       weightSpam: +filterOptions.weightSpam,
@@ -57,7 +57,7 @@ function TWCredibility() {
                     },
                     {
                       text: tweet.toString(),
-                      lang: "en" as Language,
+                      lang: "es" as Language,
                     }
                   );
                 });
