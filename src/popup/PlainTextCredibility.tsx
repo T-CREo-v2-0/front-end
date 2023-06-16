@@ -59,7 +59,7 @@ function PlainTextCredibility() {
               </label>
               <textarea
                 id="text"
-                className="form-control rounded-lg h-20 my-2.5 max-w-[90%] p-[3%] border-2 border-gray-300 font-mono text-sm"
+                className="form-control rounded-lg h-20 my-2.5 max-w-[90%] p-[3%] border-2 border-gray-300 font-mono text-sm bg-gray-50"
                 name="tweet"
                 rows={2}
                 cols={40}

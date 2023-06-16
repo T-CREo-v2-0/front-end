@@ -41,8 +41,8 @@ const Popup = () => {
   });
 
   return (
-    <div className="container p-2.5 w-[480px]">
-      <h2 className="title text-3xl font-bold my-1 text-center py-2 text-[#1DA1F2]">
+    <div className="container p-2.5 w-[480px] bg-gradient-to-r from-[#F5F8FA] to-[#e0f4ff] rounded-lg shadow-lg">
+      <h2 className="title text-3xl font-bold my-1 text-center py-2 text-transparent bg-clip-text bg-gradient-to-r to-[#657786] from-[#1DA1F2]">
         T-CREo v2.0
       </h2>
 

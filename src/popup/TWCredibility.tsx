@@ -80,7 +80,7 @@ function TWCredibility() {
 
   return (
     <div id="PageSensitiveButtons" className="flex flex-col justify-center">
-      <hr id="firstHorBar" className="my-2.5" />
+      <hr id="firstHorBar" className="h-0.5 my-2.5 bg-white" />
       {!isLoading ? (
         <div className="flex flex-col justify-center">
           <h6 id="currentPage" className="flex justify-center text-base">

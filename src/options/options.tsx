@@ -98,7 +98,7 @@ const Options = () => {
   return (
     // Center content
     <div className="container p-4 mx-auto my-4">
-      <h1 className="title text-2xl font-bold my-1 text-center py-2">
+      <h1 className="title text-2xl font-bold my-1 text-center py-2 text-[#1DA1F2]">
         T-CREo - Credibility parameters
       </h1>
       <form onSubmit={handleSubmit}>
@@ -106,7 +106,7 @@ const Options = () => {
           <div key={label.id}>
             <div className="md:flex md:items-center">
               <div className="md:w-1/2">
-                <h2 className="title text-xl font-bold md:text-right">
+                <h2 className="title text-xl font-bold md:text-right text-[#14171A]">
                   {label.title}
                 </h2>
               </div>
@@ -156,7 +156,7 @@ const Options = () => {
           <div className="md:w-1/2"></div>
           <div className="md:w-1/2">
             <button
-              className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-[#1DA1F2] hover:bg-[#657786] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="submit"
             >
               Save Weights
