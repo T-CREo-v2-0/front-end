@@ -69,6 +69,16 @@ const labels = [
         name: "weightSocial",
         errormessage: "Please enter a number between 0 and 1",
       },
+      {
+        id: 4,
+        title: "Topic credibility",
+        placeholder: "Topic",
+        type: "number",
+        min: 0,
+        max: 1,
+        name: "weightTopic",
+        errormessage: "Please enter a number between 0 and 1",
+      }
     ],
   },
   {

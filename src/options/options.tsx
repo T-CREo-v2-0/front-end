@@ -6,9 +6,10 @@ const defaultWeight = {
   weightBadWords: 0.33,
   weightMisspelling: 0.23,
   weightSpam: 0.44,
-  weightText: 0.34,
-  weightUser: 0.33,
-  weightSocial: 0.33,
+  weightText: 0.25,
+  weightUser: 0.25,
+  weightSocial: 0.25,
+  weightTopic: 0.25,
   maxFollowers: 2000000,
 };
 
@@ -20,6 +21,7 @@ const Options = () => {
     weightText: defaultWeight.weightText,
     weightUser: defaultWeight.weightUser,
     weightSocial: defaultWeight.weightSocial,
+    weightTopic: defaultWeight.weightTopic,
     maxFollowers: defaultWeight.maxFollowers,
   });
 
@@ -31,6 +33,7 @@ const Options = () => {
     weightText: boolean;
     weightUser: boolean;
     weightSocial: boolean;
+    weightTopic: boolean;
     maxFollowers: boolean;
   }
 
@@ -41,6 +44,7 @@ const Options = () => {
     weightText: false,
     weightUser: false,
     weightSocial: false,
+    weightTopic: false,
     maxFollowers: false,
   });
 
@@ -75,6 +79,7 @@ const Options = () => {
       inputs.weightText,
       inputs.weightUser,
       inputs.weightSocial,
+      inputs.weightTopic,
     ]);
     if (!sum2) {
       alert(

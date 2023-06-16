@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "weightText",
       "weightUser",
       "weightSocial",
+      "weightTopic",
       "maxFollowers",
     ],
     function (filterOptions) {
@@ -19,9 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
         chrome.storage.sync.set({ weightSpam: 0.34 });
         chrome.storage.sync.set({ weightBadWords: 0.43 });
         chrome.storage.sync.set({ weightMisspelling: 0.23 });
-        chrome.storage.sync.set({ weightText: 0.34 });
-        chrome.storage.sync.set({ weightUser: 0.33 });
-        chrome.storage.sync.set({ weightSocial: 0.33 });
+        chrome.storage.sync.set({ weightText: 0.25 });
+        chrome.storage.sync.set({ weightUser: 0.25 });
+        chrome.storage.sync.set({ weightSocial: 0.25 });
+        chrome.storage.sync.set({ weightTopic: 0.25 });
         chrome.storage.sync.set({ maxFollowers: 2000000 });
       }
     }
@@ -40,7 +42,7 @@ const Popup = () => {
 
   return (
     <div className="container p-2.5 w-[480px]">
-      <h2 className="title text-3xl font-bold my-1 text-center py-2">
+      <h2 className="title text-3xl font-bold my-1 text-center py-2 text-[#1DA1F2]">
         T-CREo v2.0
       </h2>
 

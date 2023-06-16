@@ -89,7 +89,7 @@ function TWCredibility() {
           <button
             id="VerifyPageButtonTwitterApi"
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/3 self-center my-2.5"
+            className="bg-[#1DA1F2] hover:bg-[#657786] text-white font-bold py-2 px-4 rounded w-1/3 self-center my-2.5"
             onClick={ValidateTwitterTweets}
           >
             Verify Page Tweets
