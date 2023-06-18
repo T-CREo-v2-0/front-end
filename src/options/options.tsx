@@ -61,7 +61,6 @@ const Options = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(inputs);
 
     // Check if weights text (spam, badwords, misspelling) sum is 1
     const sum = VerifySum([
@@ -90,6 +89,9 @@ const Options = () => {
 
     // Save in chrome storage
     chrome.storage.sync.set(inputs);
+
+    // Print in console
+    console.log(inputs);
 
     // Alert success
     alert("Parameters saved successfully");

@@ -28,6 +28,7 @@ function TWCredibility() {
             "weightText",
             "weightUser",
             "weightSocial",
+            "weightTopic",
             "maxFollowers",
           ],
           function (filterOptions) {
@@ -35,32 +36,33 @@ function TWCredibility() {
             if (response.instruction === "api") {
               // TO-MODIFY
               let promiseList: Promise<{ credibility: number }>[] =
-                // response.tweetIds.map((_: number) => {
-                //   return client.getTweetCredibility(
-                //     "1651454488429879300",
-                //     { weightBadWords: +filterOptions.weightBadWords,
-                //       weightMisspelling: +filterOptions.weightMisspelling,
-                //       weightSpam: +filterOptions.weightSpam,
-                //       weightText: +filterOptions.weightText,
-                //       weightSocial: +filterOptions.weightSocial,
-                //       weightUser: +filterOptions.weightUser
-                //     },
-                //     +filterOptions.maxFollowers
-                //   );
-                // });
-                response.tweetTexts.map((tweet: number) => {
-                  return client.getPlainTextCredibility(
-                    {
-                      weightBadWords: filterOptions.weightBadWords,
-                      weightMisspelling: filterOptions.weightMisspelling,
-                      weightSpam: filterOptions.weightSpam,
+                response.tweetIds.map((_: number) => {
+                  return client.getTweetCredibility(
+                    "1651454488429879296",
+                    { weightBadWords: +filterOptions.weightBadWords,
+                      weightMisspelling: +filterOptions.weightMisspelling,
+                      weightSpam: +filterOptions.weightSpam,
+                      weightText: +filterOptions.weightText,
+                      weightSocial: +filterOptions.weightSocial,
+                      weightUser: +filterOptions.weightUser,
+                      weightTopic: +filterOptions.weightTopic
                     },
-                    {
-                      text: tweet.toString(),
-                      lang: "es" as Language,
-                    }
+                    +filterOptions.maxFollowers
                   );
                 });
+                // response.tweetTexts.map((tweet: number) => {
+                //   return client.getPlainTextCredibility(
+                //     {
+                //       weightBadWords: filterOptions.weightBadWords,
+                //       weightMisspelling: filterOptions.weightMisspelling,
+                //       weightSpam: filterOptions.weightSpam,
+                //     },
+                //     {
+                //       text: tweet.toString(),
+                //       lang: "es" as Language,
+                //     }
+                //   );
+                // });
 
               Promise.all(promiseList).then((values) => {
                 port.postMessage({
