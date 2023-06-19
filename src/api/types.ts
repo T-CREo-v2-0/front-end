@@ -10,6 +10,7 @@ export interface TextCredibilityWeights {
   weightSpam: number;
   weightBadWords: number;
   weightMisspelling: number;
+  weightSemantic: number;
 }
 
 export interface TweetCredibilityWeights extends TextCredibilityWeights {

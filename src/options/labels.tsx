@@ -33,6 +33,16 @@ const labels = [
         name: "weightMisspelling",
         errormessage: "Please enter a number between 0 and 1",
       },
+      {
+        id: 4,
+        title: "Semantic analysis",
+        placeholder: "Semantic",
+        type: "number",
+        min: 0,
+        max: 1,
+        name: "weightSemantic",
+        errormessage: "Please enter a number between 0 and 1",
+      },
     ],
   },
   {
@@ -78,7 +88,7 @@ const labels = [
         max: 1,
         name: "weightTopic",
         errormessage: "Please enter a number between 0 and 1",
-      }
+      },
     ],
   },
   {

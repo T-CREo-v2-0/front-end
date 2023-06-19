@@ -6,6 +6,7 @@ const defaultWeight = {
   weightBadWords: 0.33,
   weightMisspelling: 0.23,
   weightSpam: 0.44,
+  weightSemantic: 0,
   weightText: 0.25,
   weightUser: 0.25,
   weightSocial: 0.25,
@@ -18,6 +19,7 @@ const Options = () => {
     weightSpam: defaultWeight.weightSpam,
     weightBadWords: defaultWeight.weightBadWords,
     weightMisspelling: defaultWeight.weightMisspelling,
+    weightSemantic: defaultWeight.weightSemantic,
     weightText: defaultWeight.weightText,
     weightUser: defaultWeight.weightUser,
     weightSocial: defaultWeight.weightSocial,
@@ -30,6 +32,7 @@ const Options = () => {
     weightSpam: boolean;
     weightBadWords: boolean;
     weightMisspelling: boolean;
+    weightSemantic: boolean;
     weightText: boolean;
     weightUser: boolean;
     weightSocial: boolean;
@@ -41,6 +44,7 @@ const Options = () => {
     weightSpam: false,
     weightBadWords: false,
     weightMisspelling: false,
+    weightSemantic: false,
     weightText: false,
     weightUser: false,
     weightSocial: false,
@@ -67,6 +71,7 @@ const Options = () => {
       inputs.weightSpam,
       inputs.weightBadWords,
       inputs.weightMisspelling,
+      inputs.weightSemantic,
     ]);
     if (!sum) {
       alert("The sum of the weights for text credibility parameters must be 1");

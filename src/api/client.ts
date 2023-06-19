@@ -42,6 +42,7 @@ export default class TCREoClient {
         ...tweetWeights, maxFollowers, tweetId
       }
     })
+    console.log(response.data)
     return response.data
   }
 }

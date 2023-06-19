@@ -21,7 +21,7 @@ function PlainTextCredibility() {
 
     // Get weights from chrome storage
     chrome.storage.sync.get(
-      ["weightSpam", "weightBadWords", "weightMisspelling"],
+      ["weightSpam", "weightBadWords", "weightMisspelling", "weightSemantic"],
       function (filterOptions) {
         client
           .getPlainTextCredibility(
@@ -29,6 +29,7 @@ function PlainTextCredibility() {
               weightBadWords: filterOptions.weightBadWords,
               weightMisspelling: filterOptions.weightMisspelling,
               weightSpam: filterOptions.weightSpam,
+              weightSemantic: filterOptions.weightSemantic,
             },
             {
               text: inputs.text,
