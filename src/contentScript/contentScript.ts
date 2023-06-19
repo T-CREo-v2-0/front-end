@@ -28,7 +28,7 @@ chrome.runtime.onConnect.addListener((port) => {
         texts.push(tweetTextDivs[i].querySelector("span").innerText);
       }
       const tweetTexts = texts;
-      console.log("WWW:", "Number of tweets:", tweetIds.length);
+      console.log("T-CREo:", "Number of tweets:", tweetIds.length);
 
       let tweetContainers = Array.from(
         document.querySelectorAll("[data-testid=tweet]")
@@ -73,7 +73,7 @@ chrome.runtime.onConnect.addListener((port) => {
  */
 function UpdateTweetCredibility(credibilityList: string[]) {
   //console.log(credibilityList)
-  console.log("WWW:", "Number of analyzed tweets:", credibilityList.length);
+  console.log("T-CREo:", "Number of analyzed tweets:", credibilityList.length);
 
   credibilityList.map((credibilityItem, index: number) => {
     const tweetContainer = document.querySelector<HTMLElement>(

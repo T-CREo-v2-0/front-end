@@ -39,11 +39,11 @@ export default class TCREoClient {
     tweetWeights: TweetCredibilityWeights,
     maxFollowers: number
   ): Promise<Credibility> {
-    const response = await this.client.get("/calculate/twitter/tweets", {
+    const response = await this.client.get("/calculate/tweet", {
       params: {
+        tweetId,
         ...tweetWeights,
         maxFollowers,
-        tweetId,
       },
     });
     return response.data;

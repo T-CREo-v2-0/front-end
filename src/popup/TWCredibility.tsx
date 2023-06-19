@@ -37,37 +37,37 @@ function TWCredibility() {
             if (response.instruction === "api") {
               // TO-MODIFY
               let promiseList: Promise<{ credibility: number }>[] =
-                response.tweetIds.map((_: number) => {
+                response.tweetIds.map((tweet_id_str: string) => {
                   return client.getTweetCredibility(
-                    "1651454488429879296",
+                    tweet_id_str,                    
                     {
-                      weightBadWords: +filterOptions.weightBadWords,
-                      weightMisspelling: +filterOptions.weightMisspelling,
-                      weightSpam: +filterOptions.weightSpam,
-                      weightSemantic: +filterOptions.weightSemantic,
-                      weightText: +filterOptions.weightText,
-                      weightSocial: +filterOptions.weightSocial,
-                      weightUser: +filterOptions.weightUser,
-                      weightTopic: +filterOptions.weightTopic,
+                      weightBadWords: filterOptions.weightBadWords,
+                      weightMisspelling: filterOptions.weightMisspelling,
+                      weightSpam: filterOptions.weightSpam,
+                      weightSemantic: filterOptions.weightSemantic,
+                      weightText: filterOptions.weightText,
+                      weightSocial: filterOptions.weightSocial,
+                      weightUser: filterOptions.weightUser,
+                      weightTopic: filterOptions.weightTopic,
                     },
-                    +filterOptions.maxFollowers
+                    filterOptions.maxFollowers
                   );
                 });
 
-                // response.tweetTexts.map((tweet: number) => {
-                //   return client.getPlainTextCredibility(
-                //     {
-                //       weightBadWords: filterOptions.weightBadWords,
-                //       weightMisspelling: filterOptions.weightMisspelling,
-                //       weightSpam: filterOptions.weightSpam,
-                //       weightSemantic: filterOptions.weightSemantic,
-                //     },
-                //     {
-                //       text: tweet.toString(),
-                //       lang: "es" as Language,
-                //     }
-                //   );
-                // });
+              // response.tweetTexts.map((tweet: number) => {
+              //   return client.getPlainTextCredibility(
+              //     {
+              //       weightBadWords: filterOptions.weightBadWords,
+              //       weightMisspelling: filterOptions.weightMisspelling,
+              //       weightSpam: filterOptions.weightSpam,
+              //       weightSemantic: filterOptions.weightSemantic,
+              //     },
+              //     {
+              //       text: tweet.toString(),
+              //       lang: "es" as Language,
+              //     }
+              //   );
+              // });
 
               Promise.all(promiseList).then((values) => {
                 port.postMessage({
