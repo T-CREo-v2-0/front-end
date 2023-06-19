@@ -6,7 +6,7 @@ const defaultWeight = {
   weightBadWords: 0.33,
   weightMisspelling: 0.23,
   weightSpam: 0.44,
-  weightSemantic: 0,
+  weightSemantic: 0.0,
   weightText: 0.25,
   weightUser: 0.25,
   weightSocial: 0.25,

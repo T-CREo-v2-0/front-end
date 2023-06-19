@@ -53,19 +53,21 @@ function TWCredibility() {
                     +filterOptions.maxFollowers
                   );
                 });
-              // response.tweetTexts.map((tweet: number) => {
-              //   return client.getPlainTextCredibility(
-              //     {
-              //       weightBadWords: filterOptions.weightBadWords,
-              //       weightMisspelling: filterOptions.weightMisspelling,
-              //       weightSpam: filterOptions.weightSpam,
-              //     },
-              //     {
-              //       text: tweet.toString(),
-              //       lang: "es" as Language,
-              //     }
-              //   );
-              // });
+
+                // response.tweetTexts.map((tweet: number) => {
+                //   return client.getPlainTextCredibility(
+                //     {
+                //       weightBadWords: filterOptions.weightBadWords,
+                //       weightMisspelling: filterOptions.weightMisspelling,
+                //       weightSpam: filterOptions.weightSpam,
+                //       weightSemantic: filterOptions.weightSemantic,
+                //     },
+                //     {
+                //       text: tweet.toString(),
+                //       lang: "es" as Language,
+                //     }
+                //   );
+                // });
 
               Promise.all(promiseList).then((values) => {
                 port.postMessage({

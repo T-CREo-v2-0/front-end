@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "weightSpam",
       "weightBadWords",
       "weightMisspelling",
+      "weightSemantic",
       "weightText",
       "weightUser",
       "weightSocial",
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chrome.storage.sync.set({ weightSpam: 0.34 });
         chrome.storage.sync.set({ weightBadWords: 0.43 });
         chrome.storage.sync.set({ weightMisspelling: 0.23 });
+        chrome.storage.sync.set({ weightSemantic: 0.0 });
         chrome.storage.sync.set({ weightText: 0.25 });
         chrome.storage.sync.set({ weightUser: 0.25 });
         chrome.storage.sync.set({ weightSocial: 0.25 });
