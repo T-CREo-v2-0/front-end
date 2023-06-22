@@ -75,11 +75,11 @@ function TWCredibility() {
   return (
     <div id="PageSensitiveButtons" className="flex flex-col justify-center">
       <hr id="firstHorBar" className="h-0.5 my-2.5 bg-white" />
-      {!isLoading ? (
-        <div className="flex flex-col justify-center">
-          <h6 id="currentPage" className="flex justify-center text-base">
-            You are currently on a Twitter page
-          </h6>
+      <div className="flex flex-col justify-center">
+        <h6 id="currentPage" className="flex justify-center text-base">
+          You are currently on a Twitter page
+        </h6>
+        {!isLoading ? (
           <button
             id="VerifyPageButtonTwitterApi"
             type="submit"
@@ -88,10 +88,10 @@ function TWCredibility() {
           >
             Verify Page Tweets
           </button>
-        </div>
-      ) : (
-        <Spinner />
-      )}
+        ) : (
+          <Spinner />
+        )}
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 function Spinner() {
   return (
-    <div className="Spinner flex justify-center">
+    <div className="flex justify-center py-2">
       <div className="text-center">
         <div role="status">
           <svg
