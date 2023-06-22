@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TCREoClient from "../api/client";
 import { Language } from "../api/types";
+import Spinner from "./Spinner";
 
 const client = new TCREoClient();
 
@@ -11,6 +12,7 @@ function PlainTextCredibility() {
     lang: "en",
   });
   const [credibility, setCredibility] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...inputs, text: event.target.value });
@@ -18,6 +20,7 @@ function PlainTextCredibility() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
 
     // Get weights from chrome storage
     chrome.storage.sync.get(
@@ -37,9 +40,9 @@ function PlainTextCredibility() {
             }
           )
           .then((credibility: { credibility: number }) => {
-            console.log(credibility);
             // Guarda credibilidad redondeada a 2 decimales
             setCredibility(Math.round(credibility.credibility * 100) / 100);
+            setIsLoading(false);
           })
           .catch((error: any) => {
             console.log(error);
@@ -94,7 +97,7 @@ function PlainTextCredibility() {
               id="credibility"
               className="flex items-center justify-center h-20 my-2.5 text-gray-500 text-3xl"
             >
-              {credibility}%
+              {isLoading ? <Spinner /> : credibility + "%"}
             </p>
           </div>
         </div>

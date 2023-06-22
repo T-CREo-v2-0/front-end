@@ -33,13 +33,11 @@ function TWCredibility() {
             "maxFollowers",
           ],
           function (filterOptions) {
-            // TO-MODIFY Get tweets
             if (response.instruction === "api") {
-              // TO-MODIFY
               let promiseList: Promise<{ credibility: number }>[] =
                 response.tweetIds.map((tweet_id_str: string) => {
                   return client.getTweetCredibility(
-                    tweet_id_str,                    
+                    tweet_id_str,
                     {
                       weightBadWords: filterOptions.weightBadWords,
                       weightMisspelling: filterOptions.weightMisspelling,
@@ -54,30 +52,19 @@ function TWCredibility() {
                   );
                 });
 
-              // response.tweetTexts.map((tweet: number) => {
-              //   return client.getPlainTextCredibility(
-              //     {
-              //       weightBadWords: filterOptions.weightBadWords,
-              //       weightMisspelling: filterOptions.weightMisspelling,
-              //       weightSpam: filterOptions.weightSpam,
-              //       weightSemantic: filterOptions.weightSemantic,
-              //     },
-              //     {
-              //       text: tweet.toString(),
-              //       lang: "es" as Language,
-              //     }
-              //   );
-              // });
-
-              Promise.all(promiseList).then((values) => {
-                port.postMessage({
-                  sender: "www",
-                  instruction: "update",
-                  credList: values.map((value) => value.credibility),
+              Promise.all(promiseList)
+                .then((values) => {
+                  port.postMessage({
+                    sender: "www",
+                    instruction: "update",
+                    credList: values.map((value) => value.credibility),
+                  });
+                  setIsLoading(false);
+                })
+                .catch((error: any) => {
+                  console.log(error);
+                  setIsLoading(false);
                 });
-              });
-
-              setIsLoading(false);
             }
           }
         );
