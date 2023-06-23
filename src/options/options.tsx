@@ -1,6 +1,7 @@
 import React from "react";
 import { labels } from "./labels";
 import { VerifySum } from "../controllers/weightCalculation";
+import Modal from "../components/Modal";
 
 const Options = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -106,6 +107,8 @@ const Options = () => {
       <h1 className="title text-2xl font-bold my-1 text-center py-2 text-[#1DA1F2]">
         T-CREo - Credibility parameters
       </h1>
+      <h2 className="text-center text-[#808080] content-center align-center"><Modal/></h2>
+
       <form onSubmit={handleSubmit}>
         {labels.map((label) => (
           <div key={label.id}>
