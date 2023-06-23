@@ -2,45 +2,45 @@ import React from "react";
 import { labels } from "./labels";
 import { VerifySum } from "../controllers/weightCalculation";
 
-const defaultWeight = {
-  weightBadWords: 0.33,
-  weightMisspelling: 0.23,
-  weightSpam: 0.44,
-  weightSemantic: 0.0,
-  weightText: 0.25,
-  weightUser: 0.25,
-  weightSocial: 0.25,
-  weightTopic: 0.25,
-  maxFollowers: 2000000,
-};
-
 const Options = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
   const [inputs, setInputs] = React.useState({
-    weightSpam: defaultWeight.weightSpam,
-    weightBadWords: defaultWeight.weightBadWords,
-    weightMisspelling: defaultWeight.weightMisspelling,
-    weightSemantic: defaultWeight.weightSemantic,
-    weightText: defaultWeight.weightText,
-    weightUser: defaultWeight.weightUser,
-    weightSocial: defaultWeight.weightSocial,
-    weightTopic: defaultWeight.weightTopic,
-    maxFollowers: defaultWeight.maxFollowers,
+    weightSpam: 0.44,
+    weightBadWords: 0.33,
+    weightMisspelling: 0.23,
+    weightSemantic: 0.0,
+    weightText: 0.25,
+    weightUser: 0.25,
+    weightSocial: 0.25,
+    weightTopic: 0.25,
+    maxFollowers: 2000000,
   });
 
-  // Show error message
-  interface ShowError {
-    weightSpam: boolean;
-    weightBadWords: boolean;
-    weightMisspelling: boolean;
-    weightSemantic: boolean;
-    weightText: boolean;
-    weightUser: boolean;
-    weightSocial: boolean;
-    weightTopic: boolean;
-    maxFollowers: boolean;
-  }
+  // Get parameters from storage
+  React.useEffect(() => {
+    chrome.storage.sync.get(
+      [
+        "weightSpam",
+        "weightBadWords",
+        "weightMisspelling",
+        "weightSemantic",
+        "weightText",
+        "weightUser",
+        "weightSocial",
+        "weightTopic",
+        "maxFollowers",
+      ],
+      function (filterOptions) {
+        if (filterOptions.weightSpam) {
+          setInputs(filterOptions as any);
+          setIsLoading(false);
+        }
+      }
+    );
+  }, []);
 
-  const [showError, setShowError] = React.useState<ShowError>({
+  // Show error message
+  const [showError, setShowError] = React.useState({
     weightSpam: false,
     weightBadWords: false,
     weightMisspelling: false,
@@ -94,13 +94,11 @@ const Options = () => {
 
     // Save in chrome storage
     chrome.storage.sync.set(inputs);
-
-    // Print in console
     console.log(inputs);
-
-    // Alert success
     alert("Parameters saved successfully");
   };
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     // Center content
@@ -149,7 +147,7 @@ const Options = () => {
                     }
                     onBlur={() => handleShowError(input.name)}
                   />
-                  {showError[input.name as keyof ShowError] && (
+                  {showError[input.name as keyof typeof showError] && (
                     <span className="ml-1 text-red-500 italic text-sm">
                       {input.errormessage}
                     </span>
