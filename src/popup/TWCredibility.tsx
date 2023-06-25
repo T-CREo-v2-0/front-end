@@ -57,7 +57,9 @@ function TWCredibility() {
                   port.postMessage({
                     sender: "www",
                     instruction: "update",
-                    credList: values.map((value) => Math.round(value.credibility * 100) / 100),
+                    credList: values.map(
+                      (value) => Math.round(value.credibility * 100) / 100
+                    ),
                   });
                   setIsLoading(false);
                 })

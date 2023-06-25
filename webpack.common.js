@@ -1,39 +1,39 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const tailwindcss = require('tailwindcss')
-const autoprefixer = require('autoprefixer')
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const HtmlPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer");
 
 module.exports = {
     entry: {
-        popup: path.resolve('src/popup/index.tsx'),
-        options: path.resolve('src/options/index.tsx'),
-        background: path.resolve('src/background/background.ts'),
-        contentScript: path.resolve('src/contentScript/contentScript.ts'),
+        popup: path.resolve("src/popup/index.tsx"),
+        options: path.resolve("src/options/index.tsx"),
+        background: path.resolve("src/background/background.ts"),
+        contentScript: path.resolve("src/contentScript/contentScript.ts"),
     },
     module: {
         rules: [
             {
-                use: 'ts-loader',
+                use: "ts-loader",
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
             },
             {
                 test: /\.css$/i,
                 use: [
-                    'style-loader',
+                    "style-loader",
                     {
-                        loader: 'css-loader',
+                        loader: "css-loader",
                         options: {
                             importLoaders: 1,
                         },
                     },
                     {
-                        loader: 'postcss-loader', // postcss loader needed for tailwindcss
+                        loader: "postcss-loader", // postcss loader needed for tailwindcss
                         options: {
                             postcssOptions: {
-                                ident: 'postcss',
+                                ident: "postcss",
                                 plugins: [tailwindcss, autoprefixer],
                             },
                         },
@@ -41,44 +41,46 @@ module.exports = {
                 ],
             },
             {
-                type: 'assets/resource',
+                type: "assets/resource",
                 test: /\.(png|jpg|jpeg|gif|woff|woff2|tff|eot|svg)$/,
             },
-        ]
+        ],
     },
-    "plugins": [
+    plugins: [
         new CleanWebpackPlugin({
-            cleanStaleWebpackAssets: false
+            cleanStaleWebpackAssets: false,
         }),
         new CopyPlugin({
-            patterns: [{
-                from: path.resolve('src/static'),
-                to: path.resolve('dist')
-            }]
+            patterns: [
+                {
+                    from: path.resolve("src/static"),
+                    to: path.resolve("dist"),
+                },
+            ],
         }),
-        ...getHtmlPlugins([
-            'popup',
-            'options',
-        ])
+        ...getHtmlPlugins(["popup", "options"]),
     ],
     resolve: {
-        extensions: ['.tsx', '.js', '.ts']
+        extensions: [".tsx", ".js", ".ts"],
     },
     output: {
-        filename: '[name].js',
-        path: path.join(__dirname, 'dist')
+        filename: "[name].js",
+        path: path.join(__dirname, "dist"),
     },
     optimization: {
         splitChunks: {
-            chunks: 'all',
-        }
-    }
-}
+            chunks: "all",
+        },
+    },
+};
 
 function getHtmlPlugins(chunks) {
-    return chunks.map(chunk => new HtmlPlugin({
-        title: 'T-CREo',
-        filename: `${chunk}.html`,
-        chunks: [chunk]
-    }))
+    return chunks.map(
+        (chunk) =>
+            new HtmlPlugin({
+                title: "T-CREo",
+                filename: `${chunk}.html`,
+                chunks: [chunk],
+            })
+    );
 }

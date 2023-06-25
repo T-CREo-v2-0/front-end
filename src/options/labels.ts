@@ -93,11 +93,11 @@ const labels = [
   },
   {
     id: 3,
-    title: "Followers parameter",
+    title: "Followers configuration",
     inputs: [
       {
         id: 1,
-        title: "Max followers",
+        title: "Maximum followers",
         placeholder: "Max followers",
         type: "number",
         min: 0,

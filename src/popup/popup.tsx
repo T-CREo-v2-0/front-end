@@ -39,12 +39,13 @@ const Popup = () => {
     const tab = tabs[0];
     const tabUrl = tab.url;
 
-    if (tabUrl.includes("twitter.com") || tabUrl.includes("localhost:5173")) setShowTwButton(true);
+    if (tabUrl.includes("twitter.com") || tabUrl.includes("localhost:5173"))
+      setShowTwButton(true);
   });
 
   return (
     <div className="container px-2.5 pt-2 pb-4 w-[480px] bg-gradient-to-r from-[#F5F8FA] to-[#e0f4ff]">
-      {/* Options */}
+      {/* Settings */}
       <div className="flex justify-end">
         <button
           className="text-[#657786] font-bold rounded-full"
@@ -52,7 +53,7 @@ const Popup = () => {
             chrome.tabs.create({ url: "options.html" });
           }}
         >
-          Options
+          Settings
         </button>
       </div>
 
