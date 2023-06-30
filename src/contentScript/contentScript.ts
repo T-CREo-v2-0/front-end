@@ -33,6 +33,7 @@ chrome.runtime.onConnect.addListener((port) => {
       let tweetContainers = Array.from(
         document.querySelectorAll("[data-testid=tweet]")
       );
+
       tweetContainers.map((tweetContainer, index: number) => {
         // If doesnt have Creditability-Ranking class, create one
         if (
@@ -51,6 +52,19 @@ chrome.runtime.onConnect.addListener((port) => {
           credibilityDiv.style.paddingRight = "5px";
           // Append credibility div to the child of tweetContainer.
           tweetContainer.children[0].appendChild(credibilityDiv);
+        } else {
+          // If already has Creditability-Ranking class, update the text
+          const credibilityDiv = tweetContainer.children[0].querySelector(
+            ".Credibility-Ranking"
+          ) as HTMLElement;
+          credibilityDiv.id = "TweetNumber" + index;
+          credibilityDiv.innerText = "T-CREo Credibility: Loading...";
+          credibilityDiv.style.color = "#1DA1F2";
+          credibilityDiv.style.fontSize = "14px";
+          credibilityDiv.style.fontWeight = "bold";
+          credibilityDiv.style.fontFamily = "Arial, Helvetica, sans-serif";
+          credibilityDiv.style.textAlign = "right";
+          credibilityDiv.style.paddingRight = "5px";
         }
       });
 
@@ -75,6 +89,8 @@ function UpdateTweetCredibility(credibilityList: string[]) {
   //console.log(credibilityList)
   console.log("T-CREo:", "Number of analyzed tweets:", credibilityList.length);
 
+  let totalCred = 0;
+
   credibilityList.map((credibilityItem, index: number) => {
     const tweetContainer = document.querySelector<HTMLElement>(
       "#TweetNumber" + index
@@ -95,6 +111,8 @@ function UpdateTweetCredibility(credibilityList: string[]) {
         tweetContainer.innerText =
           "T-CREo Credibility: " + credibilityItem + "%";
         tweetContainer.style.color = FinalColor;
+
+        totalCred += parseFloat(credibilityItem);
       }
     } else {
       if (tweetContainer != null) {
@@ -102,4 +120,16 @@ function UpdateTweetCredibility(credibilityList: string[]) {
       }
     }
   });
+
+  // Calculate average credibility
+  const averageCred = totalCred / credibilityList.length;
+  console.log("T-CREo:", "Average credibility:", averageCred);
+
+  // Add average credibility to the Cred-Mean class
+  const credMeanDiv = document.querySelectorAll(".Cred-Mean")[0] as HTMLElement;
+  if (credMeanDiv != null) {
+    credMeanDiv.innerText = "T-CREo Average Credibility: " + averageCred + "%";
+    credMeanDiv.style.color = "#1DA1F2";
+    credMeanDiv.style.fontWeight = "bold";
+  }
 }
